@@ -1,6 +1,7 @@
 @php
     $universe = auth()->user()->universe;
     $items = auth()->user()->items;
+    $images = $universe?->images;
 @endphp
 
 <x-app-layout>
@@ -34,11 +35,48 @@
                         <div class="flex gap-3 mb-8">
                             @foreach ([['value' => $items->count(), 'label' => 'ITEMS'], ['value' => 0, 'label' => 'MATCHES'], ['value' => 0, 'label' => 'SWAPS']] as $stat)
                                 <div class="flex-1 flex flex-col items-center py-3 rounded-2xl bg-paper shadow-neu-card">
-                                    <p class="text-xl font-semibold tracking-tight text-ink font-mono">{{ str_pad($stat['value'], 3, '0', STR_PAD_LEFT) }}</p>
+                                    <p class="text-xl font-normal tracking-tight text-ink font-mono">{{ str_pad($stat['value'], 3, '0', STR_PAD_LEFT) }}</p>
                                     <p class="text-[8px] mt-0.5 text-muted font-mono tracking-[0.14em]">{{ $stat['label'] }}</p>
                                 </div>
                             @endforeach
                         </div>
+
+                        <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-3">{{ __('Moodboard') }}</p>
+
+                        <form method="post" action="{{ route('universe.images.store') }}" enctype="multipart/form-data" class="mb-4">
+                            @csrf
+                            <div class="rounded-2xl p-6 bg-paper shadow-neu-inset flex flex-col items-center gap-2 text-center">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center bg-paper shadow-neu-subtle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 17a4 4 0 100-8 4 4 0 000 8z" />
+                                    </svg>
+                                </div>
+                                <p class="font-mono uppercase tracking-[0.14em] text-[10px] text-muted">
+                                    {{ __('Add photos') }}
+                                </p>
+                                <p class="font-mono text-[9px] text-muted/70">{{ __('JPG, PNG · up to 10MB each') }}</p>
+                                <input id="images" name="images[]" type="file" accept="image/png,image/jpeg" multiple class="sr-only peer" />
+                                <label for="images" class="mt-2 inline-flex items-center justify-center py-2.5 px-5 bg-paper rounded-full font-semibold text-xs text-ink tracking-[0.05em] shadow-neu-raised cursor-pointer active:shadow-neu-inset active:scale-[0.98] transition ease-in-out duration-150">
+                                    {{ __('Choose files') }}
+                                </label>
+                            </div>
+                            <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('images.0')" class="mt-2" />
+                            <x-primary-button class="mt-3 !py-2.5 !px-5 !text-xs">
+                                {{ __('Upload') }}
+                            </x-primary-button>
+                        </form>
+
+                        @if ($images && $images->isNotEmpty())
+                            <div class="columns-2 sm:columns-3 gap-3 mb-8 [&>*]:mb-3 [&>*]:break-inside-avoid">
+                                @foreach ($images as $image)
+                                    <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full rounded-2xl shadow-neu-card">
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-sm text-muted mb-8">{{ __('No photos yet.') }}</p>
+                        @endif
 
                         <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-3">{{ __('Wardrobe') }}</p>
 
