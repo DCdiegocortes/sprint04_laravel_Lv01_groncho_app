@@ -38,9 +38,9 @@
                 </a>
             </div>
 
-            <div class="flex flex-wrap gap-2 mb-6">
+            <div class="flex w-full gap-2 mb-6">
                 @foreach (['ALL' => __('All'), 'PENDING' => __('Pending'), 'ACCEPTED' => __('Accepted'), 'FINISHED' => __('Finished'), 'REJECTED' => __('Rejected')] as $value => $label)
-                    <a href="{{ route('exchanges.index', ['tab' => $tab, 'status' => $value]) }}" class="px-4 py-1.5 rounded-full font-mono uppercase text-[9px] font-semibold tracking-[0.1em] transition ease-in-out duration-150 {{ $status === $value ? 'bg-paper shadow-neu-inset text-ink' : 'shadow-neu-raised text-muted' }}">
+                    <a href="{{ route('exchanges.index', ['tab' => $tab, 'status' => $value]) }}" class="flex-1 text-center px-4 py-1.5 rounded-full font-mono uppercase text-[9px] font-semibold tracking-[0.1em] transition ease-in-out duration-150 {{ $status === $value ? 'bg-paper shadow-neu-inset text-ink' : 'shadow-neu-raised text-muted' }}">
                         {{ $label }}
                     </a>
                 @endforeach
