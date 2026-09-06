@@ -1,6 +1,6 @@
 @php
     $universe = auth()->user()->universe;
-    $items = auth()->user()->items;
+    $items = auth()->user()->items()->with('images')->get();
     $images = $universe?->images;
 @endphp
 
@@ -95,22 +95,36 @@
                             <p class="text-sm text-muted mb-8">{{ __('No photos yet.') }}</p>
                         @endif
 
-                        <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-3">{{ __('Wardrobe') }}</p>
+                        <div class="flex items-center justify-between mb-3">
+                            <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted">{{ __('Wardrobe') }}</p>
+                            <a href="{{ route('items.index') }}" class="font-mono text-[9px] uppercase tracking-[0.12em] text-muted hover:text-accent">
+                                {{ __('See all') }}
+                            </a>
+                        </div>
 
                         @if ($items->isEmpty())
-                            <p class="text-sm text-muted">{{ __('No items yet.') }}</p>
+                            <div class="rounded-2xl bg-paper shadow-neu-card p-6 flex items-center justify-between">
+                                <p class="text-sm text-muted">{{ __("You haven't added any items yet.") }}</p>
+                                <a href="{{ route('items.create') }}" class="inline-flex items-center py-2.5 px-5 bg-accent rounded-full font-semibold text-xs text-white tracking-[0.05em] shadow-neu-accent">
+                                    {{ __('+ Add item') }}
+                                </a>
+                            </div>
                         @else
                             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                                @foreach ($items as $item)
-                                    <div class="rounded-2xl overflow-hidden bg-paper shadow-neu-card">
-                                        <div class="w-full aspect-[3/4]" style="background-color: #D4D4D2;"></div>
+                                @foreach ($items->take(4) as $item)
+                                    <a href="{{ route('items.edit', $item) }}" class="block rounded-2xl overflow-hidden bg-paper shadow-neu-card active:shadow-neu-inset transition ease-in-out duration-150">
+                                        @if ($item->images->isNotEmpty())
+                                            <img src="{{ asset('storage/'.$item->images->first()->path) }}" alt="" class="w-full aspect-[3/4] object-cover">
+                                        @else
+                                            <div class="w-full aspect-[3/4]" style="background-color: #D4D4D2;"></div>
+                                        @endif
                                         <div class="p-3">
                                             <p class="text-[11px] font-semibold leading-tight mb-2 text-ink">{{ $item->title }}</p>
                                             <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06]">
-                                                {{ strtoupper($item->offer_type) }}
+                                                {{ strtoupper($item->offer_type->value) }}
                                             </span>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif
