@@ -1,6 +1,4 @@
 @php
-    $conditionLabels = ['NEW' => 'New', 'EXCELLENT' => 'Excellent', 'GOOD' => 'Good', 'FAIR' => 'Fair'];
-    $offerLabels = ['TRADE' => 'Trade', 'GIFT' => 'Gift', 'BOTH' => 'Trade or gift'];
     $isOwner = auth()->id() === $item->user_id;
 @endphp
 
@@ -24,11 +22,11 @@
                 @endif
 
                 <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06] mb-3">
-                    {{ strtoupper($offerLabels[$item->offer_type] ?? $item->offer_type) }}
+                    {{ strtoupper($item->offer_type->label()) }}
                 </span>
 
                 <h3 class="text-xl font-bold tracking-[-0.02em] leading-tight mb-2 text-ink">{{ $item->title }}</h3>
-                <p class="font-mono text-[10px] text-muted mb-4">{{ $item->size ?? '—' }} / {{ $conditionLabels[$item->item_condition] ?? $item->item_condition }}</p>
+                <p class="font-mono text-[10px] text-muted mb-4">{{ $item->size ?? '—' }} / {{ $item->item_condition->label() }}</p>
 
                 @if ($item->description)
                     <p class="text-sm leading-relaxed mb-6 text-muted">{{ $item->description }}</p>

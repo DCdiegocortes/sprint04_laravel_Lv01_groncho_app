@@ -1,8 +1,3 @@
-@php
-    $conditionLabels = ['NEW' => 'New', 'EXCELLENT' => 'Excellent', 'GOOD' => 'Good', 'FAIR' => 'Fair'];
-    $offerLabels = ['TRADE' => 'Trade', 'GIFT' => 'Gift', 'BOTH' => 'Trade or gift'];
-@endphp
-
 <x-app-layout>
     <x-slot name="header">
         <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-1">{{ __('005 — Wardrobe') }}</p>
@@ -47,9 +42,9 @@
                             @endif
                             <div class="p-3">
                                 <p class="text-[11px] font-semibold leading-tight mb-2 text-ink">{{ $item->title }}</p>
-                                <p class="font-mono text-[9px] text-muted mb-2">{{ $item->size ?? '—' }} / {{ $conditionLabels[$item->item_condition] ?? $item->item_condition }}</p>
+                                <p class="font-mono text-[9px] text-muted mb-2">{{ $item->size ?? '—' }} / {{ $item->item_condition->label() }}</p>
                                 <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06]">
-                                    {{ strtoupper($offerLabels[$item->offer_type] ?? $item->offer_type) }}
+                                    {{ strtoupper($item->offer_type->label()) }}
                                 </span>
                             </div>
                         </a>
