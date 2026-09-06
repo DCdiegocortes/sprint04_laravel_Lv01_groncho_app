@@ -1,4 +1,10 @@
 <div>
+    @if ($justMatched)
+        <div class="rounded-2xl bg-paper shadow-neu-card p-4 mb-4 text-center">
+            <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-accent">{{ __("It's a match with :name", ['name' => $justMatched]) }}</p>
+        </div>
+    @endif
+
     @if ($candidate && $candidate->universe)
         @php $universe = $candidate->universe; @endphp
         <div class="rounded-2xl overflow-hidden bg-paper shadow-neu-card">
