@@ -103,7 +103,7 @@
                             </div>
 
                             @if ($exchange->message)
-                                <div class="rounded-xl bg-paper shadow-neu-inset px-4 py-3 mb-4">
+                                <div class="rounded-xl bg-paper shadow-neu-inset px-4 py-3 mt-6 mb-4">
                                     <p class="text-sm text-ink leading-relaxed">&quot;{{ $exchange->message }}&quot;</p>
                                 </div>
                             @endif
