@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ItemCondition;
+use App\Enums\ItemStatus;
+use App\Enums\ItemType;
+use App\Enums\OfferType;
 use App\Models\Item;
 use App\Models\ItemImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ItemController extends Controller
@@ -38,7 +43,7 @@ class ItemController extends Controller
 
         $item = $request->user()->items()->create([
             ...$validated,
-            'status' => 'AVAILABLE',
+            'status' => ItemStatus::AVAILABLE,
         ]);
 
         $this->storeImages($request, $item);
@@ -120,10 +125,10 @@ class ItemController extends Controller
         return $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['nullable', 'string', 'max:255'],
-            'item_condition' => ['required', 'in:NEW,EXCELLENT,GOOD,FAIR'],
+            'item_condition' => ['required', Rule::enum(ItemCondition::class)],
             'size' => ['nullable', 'string', 'max:100'],
-            'type' => ['required', 'in:CLOTHES,ACCESSORIES'],
-            'offer_type' => ['required', 'in:TRADE,GIFT,BOTH'],
+            'type' => ['required', Rule::enum(ItemType::class)],
+            'offer_type' => ['required', Rule::enum(OfferType::class)],
         ]);
     }
 
