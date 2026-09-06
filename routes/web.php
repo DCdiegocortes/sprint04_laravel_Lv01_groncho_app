@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UniverseController;
 use App\Http\Controllers\UniverseImageController;
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/universe/images', [UniverseImageController::class, 'store'])->name('universe.images.store');
     Route::delete('/universe/images/{universeImage}', [UniverseImageController::class, 'destroy'])->name('universe.images.destroy');
     Route::get('/universe/{user}', [UniverseController::class, 'show'])->name('universe.show');
+
+    Route::resource('items', ItemController::class);
+    Route::delete('/items/{item}/images/{itemImage}', [ItemController::class, 'destroyImage'])->name('items.images.destroy');
 });
 
 require __DIR__.'/auth.php';
