@@ -16,7 +16,13 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             @if ($universe)
                 <div class="rounded-2xl overflow-hidden bg-paper shadow-neu-card">
-                    <div class="relative h-40" style="background: linear-gradient(135deg, #C8C8C6, #E6E6E4);"></div>
+                    <div class="relative h-40" style="background: linear-gradient(135deg, #C8C8C6, #E6E6E4);">
+                        <a href="{{ route('universe.edit') }}" class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center bg-paper shadow-neu-subtle active:shadow-neu-inset transition ease-in-out duration-150">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </a>
+                    </div>
 
                     <div class="px-6 -mt-8 relative pb-6">
                         <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-4 bg-paper shadow-neu-subtle" style="border: 4px solid #E6E6E4;">
@@ -71,7 +77,18 @@
                         @if ($images && $images->isNotEmpty())
                             <div class="columns-2 sm:columns-3 gap-3 mb-8 [&>*]:mb-3 [&>*]:break-inside-avoid">
                                 @foreach ($images as $image)
-                                    <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full rounded-2xl shadow-neu-card">
+                                    <div class="relative group">
+                                        <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full rounded-2xl shadow-neu-card">
+                                        <form method="post" action="{{ route('universe.images.destroy', $image) }}" class="absolute top-2 right-2">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="flex items-center justify-center w-6 h-6 text-white hover:text-accent active:scale-90 transition ease-in-out duration-150" style="filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
                                 @endforeach
                             </div>
                         @else
