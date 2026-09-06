@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Item extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'item_condition',
+        'size',
+        'type',
+        'offer_type',
+        'status',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ItemImage::class);
+    }
+}
