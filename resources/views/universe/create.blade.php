@@ -1,6 +1,6 @@
 @php
     $styles = ['MINIMAL / ZEN', 'Y2K / POP', 'DARK ACADEMIA / VINTAGE', 'PARISIAN / ECLECTIC', 'STREETWEAR', 'ROMANTIC / FLORAL', 'AVANT-GARDE', 'BOHO / EARTH', 'PREPPY / OLD MONEY', 'GOTHIC / DARK'];
-    $selectedStyle = old('style');
+    $selectedStyles = old('style', []);
 @endphp
 
 <x-app-layout>
@@ -38,14 +38,17 @@
                         <div class="flex flex-wrap gap-2 mt-1">
                             @foreach ($styles as $style)
                                 <label>
-                                    <input type="radio" name="style" value="{{ $style }}" class="peer sr-only" @checked($selectedStyle === $style)>
+                                    <input type="checkbox" name="style[]" value="{{ $style }}" class="peer sr-only" @checked(in_array($style, $selectedStyles, true))>
                                     <span class="flex items-center justify-center rounded-full px-5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-muted shadow-neu-raised peer-checked:text-ink peer-checked:shadow-neu-inset active:shadow-neu-inset active:scale-[0.98] cursor-pointer transition-all">
                                         {{ $style }}
                                     </span>
                                 </label>
                             @endforeach
+                            <input type="text" name="custom_style" value="{{ old('custom_style') }}" maxlength="100" placeholder="{{ __('Your own...') }}" class="w-36 rounded-full px-5 py-2.5 bg-paper border-0 font-mono text-[10px] font-semibold tracking-[0.1em] text-ink placeholder:text-muted shadow-neu-raised focus:shadow-neu-inset focus:ring-0" />
                         </div>
+                        <p class="font-mono text-[9px] text-muted/70 mt-1">{{ __('Select as many as you like. Type your own to add an extra one.') }}</p>
                         <x-input-error :messages="$errors->get('style')" />
+                        <x-input-error :messages="$errors->get('custom_style')" />
                     </div>
 
                     <x-primary-button class="w-full mt-2">{{ __('Create universe') }}</x-primary-button>
