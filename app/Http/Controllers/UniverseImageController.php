@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UniverseImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UniverseImageController extends Controller
 {
@@ -29,5 +31,18 @@ class UniverseImageController extends Controller
         }
 
         return redirect()->route('dashboard')->with('status', 'images-uploaded');
+    }
+
+    public function destroy(Request $request, UniverseImage $universeImage): RedirectResponse
+    {
+        if ($universeImage->universe_id !== $request->user()->universe?->id) {
+            abort(403);
+        }
+
+        Storage::disk('public')->delete($universeImage->path);
+
+        $universeImage->delete();
+
+        return redirect()->route('dashboard')->with('status', 'image-deleted');
     }
 }
