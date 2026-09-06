@@ -132,11 +132,11 @@
                                     <x-secondary-button type="submit" class="w-full !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
                                 </form>
                             @elseif ($exchange->status === \App\Enums\ExchangeStatus::ACCEPTED)
-                                <form method="post" action="{{ route('exchanges.update', $exchange) }}">
+                                <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex justify-center">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="FINISHED">
-                                    <x-primary-button class="w-full !py-2.5 !px-4 !text-xs">{{ __('Mark as finished') }}</x-primary-button>
+                                    <x-primary-button class="w-full max-w-xs !py-2.5 !px-4 !text-xs">{{ __('Mark as finished') }}</x-primary-button>
                                 </form>
                             @endif
                         </div>
