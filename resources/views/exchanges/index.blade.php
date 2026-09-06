@@ -138,7 +138,7 @@
                                 </form>
                             @endif
 
-                            <p class="font-mono uppercase tracking-[0.1em] text-[8px] text-right text-muted mt-3" style="text-shadow: -0.5px -0.5px 1px rgba(0,0,0,0.15), 1px 1px 1.5px rgba(255,255,255,0.9);">
+                            <p class="font-mono uppercase tracking-[0.1em] text-[11px] text-right text-muted mt-3" style="text-shadow: -0.5px -0.5px 1px rgba(0,0,0,0.15), 1px 1px 1.5px rgba(255,255,255,0.9);">
                                 {{ $exchange->created_at->format('M d, Y') }}
                             </p>
                         </div>
