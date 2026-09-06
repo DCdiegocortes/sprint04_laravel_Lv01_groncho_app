@@ -121,7 +121,7 @@
                                         <div class="p-3">
                                             <p class="text-[11px] font-semibold leading-tight mb-2 text-ink">{{ $item->title }}</p>
                                             <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06]">
-                                                {{ strtoupper($item->offer_type) }}
+                                                {{ strtoupper($item->offer_type->value) }}
                                             </span>
                                         </div>
                                     </a>
