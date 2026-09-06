@@ -74,8 +74,6 @@
                                 </span>
                             </div>
 
-                            <p class="font-mono uppercase tracking-[0.1em] text-[8px] text-muted mb-3">{{ $exchange->created_at->format('M d, Y') }}</p>
-
                             <div class="flex flex-col sm:flex-row items-stretch justify-center gap-4 mb-4">
                                 <div class="flex-1 flex flex-col items-center gap-2 rounded-xl bg-paper shadow-neu-subtle p-3">
                                     @if ($exchange->requestedItem->images->isNotEmpty())
@@ -139,6 +137,10 @@
                                     <x-primary-button class="w-full max-w-xs !py-2.5 !px-4 !text-xs">{{ __('Mark as finished') }}</x-primary-button>
                                 </form>
                             @endif
+
+                            <p class="font-mono uppercase tracking-[0.1em] text-[8px] text-right text-muted mt-3" style="text-shadow: -0.5px -0.5px 1px rgba(0,0,0,0.15), 1px 1px 1.5px rgba(255,255,255,0.9);">
+                                {{ $exchange->created_at->format('M d, Y') }}
+                            </p>
                         </div>
                     @endforeach
                 </div>
