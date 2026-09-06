@@ -124,10 +124,10 @@
                                     </form>
                                 </div>
                             @elseif ($tab === 'sent' && $exchange->status === \App\Enums\ExchangeStatus::PENDING)
-                                <form method="post" action="{{ route('exchanges.destroy', $exchange) }}">
+                                <form method="post" action="{{ route('exchanges.destroy', $exchange) }}" class="flex justify-center mt-6">
                                     @csrf
                                     @method('DELETE')
-                                    <x-secondary-button type="submit" class="w-full !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
+                                    <x-secondary-button type="submit" class="w-full max-w-xs !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
                                 </form>
                             @elseif ($exchange->status === \App\Enums\ExchangeStatus::ACCEPTED)
                                 <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex justify-center mt-6">
