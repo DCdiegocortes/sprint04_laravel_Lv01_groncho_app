@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\ExchangeStatus;
+use App\Enums\ExchangeType;
 use Illuminate\Database\Eloquent\Model;
 
 class Exchange extends Model
@@ -14,6 +16,11 @@ class Exchange extends Model
         'type',
         'status',
         'message',
+    ];
+
+    protected $casts = [
+        'type' => ExchangeType::class,
+        'status' => ExchangeStatus::class,
     ];
 
     public function match()
