@@ -28,4 +28,14 @@ class MatchModel extends Model
     {
         return $this->hasMany(Exchange::class, 'match_id');
     }
+
+    public function scopeForUser($query, int $userId)
+    {
+        return $query->where('user_one_id', $userId)->orWhere('user_two_id', $userId);
+    }
+
+    public function other(int $userId): User
+    {
+        return $this->user_one_id === $userId ? $this->userTwo : $this->userOne;
+    }
 }
