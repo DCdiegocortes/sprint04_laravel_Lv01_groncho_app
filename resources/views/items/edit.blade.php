@@ -61,7 +61,7 @@
                         <div class="flex flex-wrap gap-2 mt-1">
                             @foreach ($types as $value => $label)
                                 <label>
-                                    <input type="radio" name="type" value="{{ $value }}" class="peer sr-only" @checked(old('type', $item->type) === $value)>
+                                    <input type="radio" name="type" value="{{ $value }}" class="peer sr-only" @checked(old('type', $item->type->value) === $value)>
                                     <span class="flex items-center justify-center rounded-full px-5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-muted shadow-neu-raised peer-checked:text-ink peer-checked:shadow-neu-inset active:shadow-neu-inset active:scale-[0.98] cursor-pointer transition-all">
                                         {{ strtoupper($label) }}
                                     </span>
@@ -76,7 +76,7 @@
                         <div class="flex flex-wrap gap-2 mt-1">
                             @foreach ($conditions as $value => $label)
                                 <label>
-                                    <input type="radio" name="item_condition" value="{{ $value }}" class="peer sr-only" @checked(old('item_condition', $item->item_condition) === $value)>
+                                    <input type="radio" name="item_condition" value="{{ $value }}" class="peer sr-only" @checked(old('item_condition', $item->item_condition->value) === $value)>
                                     <span class="flex items-center justify-center rounded-full px-5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-muted shadow-neu-raised peer-checked:text-ink peer-checked:shadow-neu-inset active:shadow-neu-inset active:scale-[0.98] cursor-pointer transition-all">
                                         {{ strtoupper($label) }}
                                     </span>
@@ -91,7 +91,7 @@
                         <div class="flex flex-wrap gap-2 mt-1">
                             @foreach ($offerTypes as $value => $label)
                                 <label>
-                                    <input type="radio" name="offer_type" value="{{ $value }}" class="peer sr-only" @checked(old('offer_type', $item->offer_type) === $value)>
+                                    <input type="radio" name="offer_type" value="{{ $value }}" class="peer sr-only" @checked(old('offer_type', $item->offer_type->value) === $value)>
                                     <span class="flex items-center justify-center rounded-full px-5 py-2.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-muted shadow-neu-raised peer-checked:text-ink peer-checked:shadow-neu-inset active:shadow-neu-inset active:scale-[0.98] cursor-pointer transition-all">
                                         {{ strtoupper($label) }}
                                     </span>
