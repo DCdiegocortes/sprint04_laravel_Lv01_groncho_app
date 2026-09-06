@@ -34,13 +34,34 @@
                     <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-3">{{ __('Moodboard') }}</p>
 
                     @if ($images->isNotEmpty())
-                        <div class="columns-2 sm:columns-3 gap-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
+                        <div class="columns-2 sm:columns-3 gap-3 mb-8 [&>*]:mb-3 [&>*]:break-inside-avoid">
                             @foreach ($images as $image)
                                 <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full rounded-2xl shadow-neu-card">
                             @endforeach
                         </div>
                     @else
-                        <p class="text-sm text-muted">{{ __('No photos yet.') }}</p>
+                        <p class="text-sm text-muted mb-8">{{ __('No photos yet.') }}</p>
+                    @endif
+
+                    @if ($items->isNotEmpty())
+                        <p class="font-mono uppercase tracking-[0.18em] text-[10px] text-muted mb-3">{{ __('Wardrobe') }}</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                            @foreach ($items as $item)
+                                <a href="{{ route('items.show', $item) }}" class="block rounded-2xl overflow-hidden bg-paper shadow-neu-card active:shadow-neu-inset transition ease-in-out duration-150">
+                                    @if ($item->images->isNotEmpty())
+                                        <img src="{{ asset('storage/'.$item->images->first()->path) }}" alt="" class="w-full aspect-[3/4] object-cover">
+                                    @else
+                                        <div class="w-full aspect-[3/4]" style="background-color: #D4D4D2;"></div>
+                                    @endif
+                                    <div class="p-3">
+                                        <p class="text-[11px] font-semibold leading-tight mb-2 text-ink">{{ $item->title }}</p>
+                                        <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06]">
+                                            {{ strtoupper($item->offer_type->value) }}
+                                        </span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
                     @endif
                 </div>
             </div>
