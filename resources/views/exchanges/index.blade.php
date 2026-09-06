@@ -25,6 +25,11 @@
 
     <div class="py-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-[28px] font-black leading-none mb-1 text-[#C8C8C6]" style="font-family: Inter, sans-serif; letter-spacing: 0.28em; text-shadow: -1px -1px 2px rgba(0,0,0,0.18), 2px 2px 3px rgba(255,255,255,0.95);">
+                GRÔNCHÔ
+            </p>
+            <div class="h-[2px] mb-8 bg-accent" style="width: 66px;"></div>
+
             @if (session('status') && isset($statusMessages[session('status')]))
                 <p class="font-mono text-[10px] text-accent mb-4">{{ $statusMessages[session('status')] }}</p>
             @endif
