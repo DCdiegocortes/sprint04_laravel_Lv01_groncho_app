@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/universe', [UniverseController::class, 'update'])->name('universe.update');
     Route::post('/universe/images', [UniverseImageController::class, 'store'])->name('universe.images.store');
     Route::delete('/universe/images/{universeImage}', [UniverseImageController::class, 'destroy'])->name('universe.images.destroy');
+    Route::get('/universe/{user}', [UniverseController::class, 'show'])->name('universe.show');
 });
 
 require __DIR__.'/auth.php';
