@@ -51,8 +51,8 @@
                     </div>
 
                     <div class="flex items-center justify-center gap-3 mt-2">
-                        <x-primary-button>{{ __('Save changes') }}</x-primary-button>
-                        <x-secondary-button type="button" onclick="window.location='{{ route('dashboard') }}'">
+                        <x-primary-button class="!py-2.5 !px-8">{{ __('Save changes') }}</x-primary-button>
+                        <x-secondary-button type="button" class="!py-2.5 !px-8" onclick="window.location='{{ route('dashboard') }}'">
                             {{ __('Cancel') }}
                         </x-secondary-button>
                     </div>
