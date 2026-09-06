@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -9,6 +10,16 @@ use Illuminate\View\View;
 
 class UniverseController extends Controller
 {
+    /**
+     * Show another user's universe, read-only.
+     */
+    public function show(User $user): View
+    {
+        abort_unless($user->universe, 404);
+
+        return view('universe.show', ['owner' => $user, 'universe' => $user->universe]);
+    }
+
     /**
      * Show the form to create the authenticated user's universe.
      */
