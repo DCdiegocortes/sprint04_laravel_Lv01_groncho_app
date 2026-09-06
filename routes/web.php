@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('items', ItemController::class);
     Route::delete('/items/{item}/images/{itemImage}', [ItemController::class, 'destroyImage'])->name('items.images.destroy');
+
+    Route::get('/discover', function () {
+        return view('discover');
+    })->name('discover');
 });
 
 require __DIR__.'/auth.php';
