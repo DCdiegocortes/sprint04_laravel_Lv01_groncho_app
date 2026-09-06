@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UniverseController;
 use App\Http\Controllers\UniverseImageController;
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/discover', function () {
         return view('discover');
     })->name('discover');
+
+    Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
 });
 
 require __DIR__.'/auth.php';
