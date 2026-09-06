@@ -50,7 +50,7 @@
                         <x-input-error :messages="$errors->get('custom_style')" />
                     </div>
 
-                    <div class="flex items-center gap-3 mt-2">
+                    <div class="flex items-center justify-center gap-3 mt-2">
                         <x-primary-button>{{ __('Save changes') }}</x-primary-button>
                         <x-secondary-button type="button" onclick="window.location='{{ route('dashboard') }}'">
                             {{ __('Cancel') }}
