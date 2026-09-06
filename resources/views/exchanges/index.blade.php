@@ -24,7 +24,7 @@
     </x-slot>
 
     <div class="py-10">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             @if (session('status') && isset($statusMessages[session('status')]))
                 <p class="font-mono text-[10px] text-accent mb-4">{{ $statusMessages[session('status')] }}</p>
             @endif
