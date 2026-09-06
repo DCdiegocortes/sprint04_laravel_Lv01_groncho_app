@@ -53,7 +53,8 @@
 
             @if ($exchanges->isEmpty())
                 <div class="rounded-2xl bg-paper shadow-neu-card p-6 text-center">
-                    <p class="text-sm text-muted">{{ __("Nothing here yet.") }}</p>
+                    <p class="text-sm text-muted">{{ __("Nothing here yet") }}</p>
+                    <p class="text-sm text-muted">...</p>
                 </div>
             @else
                 <div class="flex flex-col gap-3">
