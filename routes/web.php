@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExchangeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,8 @@ Route::middleware('auth')->group(function () {
     })->name('discover');
 
     Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
+
+    Route::resource('exchanges', ExchangeController::class)->except(['edit']);
 });
 
 require __DIR__.'/auth.php';
