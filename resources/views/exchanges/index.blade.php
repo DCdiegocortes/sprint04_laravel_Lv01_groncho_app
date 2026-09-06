@@ -59,11 +59,11 @@
                         <div class="rounded-2xl bg-paper shadow-neu-card p-5">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-paper shadow-neu-subtle shrink-0">
-                                        <span class="font-mono text-base text-ink">{{ strtoupper(substr($otherName, 0, 1)) }}</span>
+                                    <div class="w-14 h-14 rounded-xl flex items-center justify-center bg-paper shadow-neu-subtle shrink-0">
+                                        <span class="font-mono text-lg text-ink">{{ strtoupper(substr($otherName, 0, 1)) }}</span>
                                     </div>
                                     <div>
-                                        <p class="text-base font-semibold leading-tight text-ink">{{ $otherName }}</p>
+                                        <p class="text-xl font-semibold leading-tight text-ink">{{ $otherName }}</p>
                                         <p class="font-mono uppercase tracking-[0.1em] text-[9px] text-accent">
                                             {{ $tab === 'sent' ? __('Request sent') : __('Wants to :type', ['type' => $exchange->type === \App\Enums\ExchangeType::GIFT ? __('give a gift') : __('trade')]) }}
                                         </p>
