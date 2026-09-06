@@ -20,7 +20,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/universe/create', [UniverseController::class, 'create'])->name('universe.create');
     Route::post('/universe', [UniverseController::class, 'store'])->name('universe.store');
+    Route::get('/universe/edit', [UniverseController::class, 'edit'])->name('universe.edit');
+    Route::put('/universe', [UniverseController::class, 'update'])->name('universe.update');
     Route::post('/universe/images', [UniverseImageController::class, 'store'])->name('universe.images.store');
+    Route::delete('/universe/images/{universeImage}', [UniverseImageController::class, 'destroy'])->name('universe.images.destroy');
 });
 
 require __DIR__.'/auth.php';
