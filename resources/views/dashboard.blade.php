@@ -3,11 +3,8 @@
     $items = auth()->user()->items()->with('images')->get();
     $images = $universe?->images;
     $matchesCount = \App\Models\MatchModel::forUser(auth()->id())->count();
-    $swapsCount = \App\Models\Exchange::where('status', \App\Enums\ExchangeStatus::FINISHED)
-        ->where(function ($query) {
-            $query->where('requester_id', auth()->id())
-                ->orWhereHas('requestedItem', fn ($q) => $q->where('user_id', auth()->id()));
-        })
+    $requestsCount = \App\Models\Exchange::where('requester_id', auth()->id())
+        ->orWhereHas('requestedItem', fn ($q) => $q->where('user_id', auth()->id()))
         ->count();
 @endphp
 
@@ -21,6 +18,11 @@
 
     <div class="py-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-[28px] font-black leading-none mb-1 text-[#C8C8C6]" style="font-family: Inter, sans-serif; letter-spacing: 0.28em; text-shadow: -1px -1px 2px rgba(0,0,0,0.18), 2px 2px 3px rgba(255,255,255,0.95);">
+                GRÔNCHÔ
+            </p>
+            <div class="h-[2px] mb-8 bg-accent" style="width: 66px;"></div>
+
             @if ($universe)
                 <div class="rounded-2xl overflow-hidden bg-paper shadow-neu-card">
                     <div class="relative h-40" style="background: linear-gradient(135deg, #C8C8C6, #E6E6E4);">
@@ -46,11 +48,11 @@
                         @endif
 
                         <div class="flex gap-3 mb-8">
-                            @foreach ([['value' => $items->count(), 'label' => 'ITEMS'], ['value' => $matchesCount, 'label' => 'MATCHES'], ['value' => $swapsCount, 'label' => 'SWAPS']] as $stat)
-                                <div class="flex-1 flex flex-col items-center py-3 rounded-2xl bg-paper shadow-neu-card">
+                            @foreach ([['value' => $items->count(), 'label' => 'ITEMS', 'route' => route('items.index')], ['value' => $matchesCount, 'label' => 'MATCHES', 'route' => route('matches.index')], ['value' => $requestsCount, 'label' => 'REQUESTS', 'route' => route('exchanges.index')]] as $stat)
+                                <a href="{{ $stat['route'] }}" class="flex-1 flex flex-col items-center py-3 rounded-2xl bg-paper shadow-neu-card active:shadow-neu-inset transition ease-in-out duration-150">
                                     <p class="text-xl font-normal tracking-tight text-ink font-mono">{{ str_pad($stat['value'], 3, '0', STR_PAD_LEFT) }}</p>
                                     <p class="text-[8px] mt-0.5 text-muted font-mono tracking-[0.14em]">{{ $stat['label'] }}</p>
-                                </div>
+                                </a>
                             @endforeach
                         </div>
 
