@@ -38,4 +38,16 @@ class MatchModel extends Model
     {
         return $this->user_one_id === $userId ? $this->userTwo : $this->userOne;
     }
+
+    public function includesUser(int $userId): bool
+    {
+        return $this->user_one_id === $userId || $this->user_two_id === $userId;
+    }
+
+    public static function between(int $userAId, int $userBId): ?self
+    {
+        return static::where('user_one_id', min($userAId, $userBId))
+            ->where('user_two_id', max($userAId, $userBId))
+            ->first();
+    }
 }

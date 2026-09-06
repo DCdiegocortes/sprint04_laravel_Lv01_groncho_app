@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.index')">
                         {{ __('Matches') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('exchanges.index')" :active="request()->routeIs('exchanges.*')">
+                        {{ __('Requests') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -81,6 +84,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.index')">
                 {{ __('Matches') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('exchanges.index')" :active="request()->routeIs('exchanges.*')">
+                {{ __('Requests') }}
             </x-responsive-nav-link>
         </div>
 

@@ -14,11 +14,17 @@
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="rounded-2xl bg-paper shadow-neu-card p-6">
                 @if ($item->images->isNotEmpty())
-                    <div class="columns-2 sm:columns-3 gap-3 mb-6 [&>*]:mb-3 [&>*]:break-inside-avoid">
-                        @foreach ($item->images as $image)
-                            <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full rounded-2xl shadow-neu-card">
-                        @endforeach
-                    </div>
+                    @if ($item->images->count() === 1)
+                        <div class="flex justify-center mb-6">
+                            <img src="{{ asset('storage/'.$item->images->first()->path) }}" alt="" class="max-w-xs w-full rounded-2xl shadow-neu-card">
+                        </div>
+                    @else
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            @foreach ($item->images as $image)
+                                <img src="{{ asset('storage/'.$image->path) }}" alt="" class="w-full aspect-square rounded-2xl object-cover shadow-neu-card">
+                            @endforeach
+                        </div>
+                    @endif
                 @endif
 
                 <span class="inline-flex items-center px-2 py-[3px] rounded-sm font-mono text-[9px] font-semibold tracking-[0.1em] text-muted bg-ink/[0.06] mb-3">
@@ -33,10 +39,16 @@
                 @endif
 
                 @if ($isOwner)
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center justify-center gap-3">
                         <x-secondary-button type="button" onclick="window.location='{{ route('items.edit', $item) }}'">
                             {{ __('Edit') }}
                         </x-secondary-button>
+                    </div>
+                @elseif ($isMatched && $item->status === \App\Enums\ItemStatus::AVAILABLE)
+                    <div class="flex items-center justify-center gap-3">
+                        <x-primary-button type="button" onclick="window.location='{{ route('exchanges.create', ['item' => $item->id]) }}'">
+                            {{ __('Request') }}
+                        </x-primary-button>
                     </div>
                 @endif
             </div>

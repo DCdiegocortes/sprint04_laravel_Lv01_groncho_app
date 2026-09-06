@@ -2,6 +2,13 @@
     $universe = auth()->user()->universe;
     $items = auth()->user()->items()->with('images')->get();
     $images = $universe?->images;
+    $matchesCount = \App\Models\MatchModel::forUser(auth()->id())->count();
+    $swapsCount = \App\Models\Exchange::where('status', \App\Enums\ExchangeStatus::FINISHED)
+        ->where(function ($query) {
+            $query->where('requester_id', auth()->id())
+                ->orWhereHas('requestedItem', fn ($q) => $q->where('user_id', auth()->id()));
+        })
+        ->count();
 @endphp
 
 <x-app-layout>
@@ -39,7 +46,7 @@
                         @endif
 
                         <div class="flex gap-3 mb-8">
-                            @foreach ([['value' => $items->count(), 'label' => 'ITEMS'], ['value' => 0, 'label' => 'MATCHES'], ['value' => 0, 'label' => 'SWAPS']] as $stat)
+                            @foreach ([['value' => $items->count(), 'label' => 'ITEMS'], ['value' => $matchesCount, 'label' => 'MATCHES'], ['value' => $swapsCount, 'label' => 'SWAPS']] as $stat)
                                 <div class="flex-1 flex flex-col items-center py-3 rounded-2xl bg-paper shadow-neu-card">
                                     <p class="text-xl font-normal tracking-tight text-ink font-mono">{{ str_pad($stat['value'], 3, '0', STR_PAD_LEFT) }}</p>
                                     <p class="text-[8px] mt-0.5 text-muted font-mono tracking-[0.14em]">{{ $stat['label'] }}</p>

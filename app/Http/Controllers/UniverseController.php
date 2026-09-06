@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ItemStatus;
+use App\Models\MatchModel;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,11 +15,17 @@ class UniverseController extends Controller
     /**
      * Show another user's universe, read-only.
      */
-    public function show(User $user): View
+    public function show(Request $request, User $user): View
     {
         abort_unless($user->universe, 404);
 
-        return view('universe.show', ['owner' => $user, 'universe' => $user->universe]);
+        $match = MatchModel::between($request->user()->id, $user->id);
+
+        return view('universe.show', [
+            'owner' => $user,
+            'universe' => $user->universe,
+            'items' => $match ? $user->items()->with('images')->where('status', ItemStatus::AVAILABLE)->get() : collect(),
+        ]);
     }
 
     /**

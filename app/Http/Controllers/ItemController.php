@@ -54,9 +54,12 @@ class ItemController extends Controller
     /**
      * Show a single item.
      */
-    public function show(Item $item): View
+    public function show(Request $request, Item $item): View
     {
-        return view('items.show', ['item' => $item]);
+        $isMatched = $request->user()->id !== $item->user_id
+            && \App\Models\MatchModel::between($request->user()->id, $item->user_id);
+
+        return view('items.show', ['item' => $item, 'isMatched' => (bool) $isMatched]);
     }
 
     /**
