@@ -29,10 +29,13 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="pb-24">
                 {{ $slot }}
             </main>
         </div>
+
+        @include('layouts.bottom-nav')
+
         @livewireScripts
     </body>
 </html>
