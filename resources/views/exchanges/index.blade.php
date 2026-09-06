@@ -68,8 +68,8 @@
                                         <span class="font-mono text-lg text-ink">{{ strtoupper(substr($otherName, 0, 1)) }}</span>
                                     </div>
                                     <div>
-                                        <p class="text-xl font-semibold leading-tight text-ink">{{ $otherName }}</p>
-                                        <p class="font-mono uppercase tracking-[0.1em] text-[9px] text-accent">
+                                        <p class="text-2xl font-semibold leading-tight text-ink">{{ $otherName }}</p>
+                                        <p class="font-mono uppercase tracking-[0.1em] text-[9px] text-accent whitespace-nowrap">
                                             {{ $tab === 'sent' ? __('Request sent') : __('Wants to :type', ['type' => $exchange->type === \App\Enums\ExchangeType::GIFT ? __('give a gift') : __('trade')]) }}
                                         </p>
                                     </div>
