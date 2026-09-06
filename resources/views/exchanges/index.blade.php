@@ -56,7 +56,7 @@
                         @php
                             $otherName = $tab === 'sent' ? $exchange->requestedItem->user->name : $exchange->requester->name;
                         @endphp
-                        <div class="rounded-2xl bg-paper shadow-neu-card p-5">
+                        <div class="rounded-2xl bg-paper shadow-neu-card px-5 pt-5 pb-3">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-14 h-14 rounded-xl flex items-center justify-center bg-paper shadow-neu-subtle shrink-0">
@@ -130,7 +130,7 @@
                                     <x-secondary-button type="submit" class="w-full !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
                                 </form>
                             @elseif ($exchange->status === \App\Enums\ExchangeStatus::ACCEPTED)
-                                <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex justify-center">
+                                <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex justify-center mt-6">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="FINISHED">
