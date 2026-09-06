@@ -109,7 +109,7 @@
                             @endif
 
                             @if ($tab === 'received' && $exchange->status === \App\Enums\ExchangeStatus::PENDING)
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3 mt-6">
                                     <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex-1">
                                         @csrf
                                         @method('PATCH')
