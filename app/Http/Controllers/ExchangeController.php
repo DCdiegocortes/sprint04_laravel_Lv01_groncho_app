@@ -74,7 +74,7 @@ class ExchangeController extends Controller
 
         $item = Item::findOrFail($validated['item_id']);
 
-        $offeredItem = $validated['offered_item_id']
+        $offeredItem = ($validated['offered_item_id'] ?? null)
             ? $request->user()->items()->findOrFail($validated['offered_item_id'])
             : null;
 

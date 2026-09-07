@@ -24,7 +24,12 @@
     </x-slot>
 
     <div class="py-10">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-[28px] font-black leading-none mb-1 text-[#C8C8C6]" style="font-family: Inter, sans-serif; letter-spacing: 0.28em; text-shadow: -1px -1px 2px rgba(0,0,0,0.18), 2px 2px 3px rgba(255,255,255,0.95);">
+                GRÔNCHÔ
+            </p>
+            <div class="h-[2px] mb-8 bg-accent" style="width: 66px;"></div>
+
             @if (session('status') && isset($statusMessages[session('status')]))
                 <p class="font-mono text-[10px] text-accent mb-4">{{ $statusMessages[session('status')] }}</p>
             @endif
@@ -38,9 +43,9 @@
                 </a>
             </div>
 
-            <div class="flex flex-wrap gap-2 mb-6">
+            <div class="flex w-full gap-2 mb-6">
                 @foreach (['ALL' => __('All'), 'PENDING' => __('Pending'), 'ACCEPTED' => __('Accepted'), 'FINISHED' => __('Finished'), 'REJECTED' => __('Rejected')] as $value => $label)
-                    <a href="{{ route('exchanges.index', ['tab' => $tab, 'status' => $value]) }}" class="px-4 py-1.5 rounded-full font-mono uppercase text-[9px] font-semibold tracking-[0.1em] transition ease-in-out duration-150 {{ $status === $value ? 'bg-paper shadow-neu-inset text-ink' : 'shadow-neu-raised text-muted' }}">
+                    <a href="{{ route('exchanges.index', ['tab' => $tab, 'status' => $value]) }}" class="flex-1 text-center px-4 py-1.5 rounded-full font-mono uppercase text-[9px] font-semibold tracking-[0.1em] transition ease-in-out duration-150 {{ $status === $value ? 'bg-paper shadow-neu-inset text-ink' : 'shadow-neu-raised text-muted' }}">
                         {{ $label }}
                     </a>
                 @endforeach
@@ -48,7 +53,8 @@
 
             @if ($exchanges->isEmpty())
                 <div class="rounded-2xl bg-paper shadow-neu-card p-6 text-center">
-                    <p class="text-sm text-muted">{{ __("Nothing here yet.") }}</p>
+                    <p class="text-sm text-muted">{{ __("Nothing here yet") }}</p>
+                    <p class="text-sm text-muted">...</p>
                 </div>
             @else
                 <div class="flex flex-col gap-3">
@@ -56,15 +62,15 @@
                         @php
                             $otherName = $tab === 'sent' ? $exchange->requestedItem->user->name : $exchange->requester->name;
                         @endphp
-                        <div class="rounded-2xl bg-paper shadow-neu-card p-5">
+                        <div class="rounded-2xl bg-paper shadow-neu-card px-5 pt-5 pb-3">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-paper shadow-neu-subtle shrink-0">
-                                        <span class="font-mono text-base text-ink">{{ strtoupper(substr($otherName, 0, 1)) }}</span>
+                                    <div class="w-14 h-14 rounded-xl flex items-center justify-center bg-paper shadow-neu-subtle shrink-0">
+                                        <span class="font-mono text-lg text-ink">{{ strtoupper(substr($otherName, 0, 1)) }}</span>
                                     </div>
                                     <div>
-                                        <p class="text-base font-semibold leading-tight text-ink">{{ $otherName }}</p>
-                                        <p class="font-mono uppercase tracking-[0.1em] text-[9px] text-accent">
+                                        <p class="text-2xl font-semibold leading-tight text-ink">{{ $otherName }}</p>
+                                        <p class="font-mono uppercase tracking-[0.1em] text-[9px] text-accent whitespace-nowrap">
                                             {{ $tab === 'sent' ? __('Request sent') : __('Wants to :type', ['type' => $exchange->type === \App\Enums\ExchangeType::GIFT ? __('give a gift') : __('trade')]) }}
                                         </p>
                                     </div>
@@ -73,8 +79,6 @@
                                     {{ $exchange->status->value }}
                                 </span>
                             </div>
-
-                            <p class="font-mono uppercase tracking-[0.1em] text-[8px] text-muted mb-3">{{ $exchange->created_at->format('M d, Y') }}</p>
 
                             <div class="flex flex-col sm:flex-row items-stretch justify-center gap-4 mb-4">
                                 <div class="flex-1 flex flex-col items-center gap-2 rounded-xl bg-paper shadow-neu-subtle p-3">
@@ -105,13 +109,13 @@
                             </div>
 
                             @if ($exchange->message)
-                                <div class="rounded-xl bg-paper shadow-neu-inset px-4 py-3 mb-4">
+                                <div class="rounded-xl bg-paper shadow-neu-inset px-6 py-5 mt-6 mb-4">
                                     <p class="text-sm text-ink leading-relaxed">&quot;{{ $exchange->message }}&quot;</p>
                                 </div>
                             @endif
 
                             @if ($tab === 'received' && $exchange->status === \App\Enums\ExchangeStatus::PENDING)
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-3 mt-6">
                                     <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex-1">
                                         @csrf
                                         @method('PATCH')
@@ -126,19 +130,23 @@
                                     </form>
                                 </div>
                             @elseif ($tab === 'sent' && $exchange->status === \App\Enums\ExchangeStatus::PENDING)
-                                <form method="post" action="{{ route('exchanges.destroy', $exchange) }}">
+                                <form method="post" action="{{ route('exchanges.destroy', $exchange) }}" class="flex justify-center mt-6">
                                     @csrf
                                     @method('DELETE')
-                                    <x-secondary-button type="submit" class="w-full !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
+                                    <x-secondary-button type="submit" class="w-full max-w-xs !py-2.5 !px-4 !text-xs">{{ __('Cancel request') }}</x-secondary-button>
                                 </form>
                             @elseif ($exchange->status === \App\Enums\ExchangeStatus::ACCEPTED)
-                                <form method="post" action="{{ route('exchanges.update', $exchange) }}">
+                                <form method="post" action="{{ route('exchanges.update', $exchange) }}" class="flex justify-center mt-6">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="FINISHED">
-                                    <x-primary-button class="w-full !py-2.5 !px-4 !text-xs">{{ __('Mark as finished') }}</x-primary-button>
+                                    <x-primary-button class="w-full max-w-xs !py-2.5 !px-4 !text-xs">{{ __('Mark as finished') }}</x-primary-button>
                                 </form>
                             @endif
+
+                            <p class="font-mono uppercase tracking-[0.1em] text-[11px] text-right text-muted mt-3" style="text-shadow: -0.5px -0.5px 1px rgba(0,0,0,0.15), 1px 1px 1.5px rgba(255,255,255,0.9);">
+                                {{ $exchange->created_at->format('M d, Y') }}
+                            </p>
                         </div>
                     @endforeach
                 </div>

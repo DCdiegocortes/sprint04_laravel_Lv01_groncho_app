@@ -15,6 +15,11 @@
 
     <div class="py-10">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-[28px] font-black leading-none mb-1 text-[#C8C8C6]" style="font-family: Inter, sans-serif; letter-spacing: 0.28em; text-shadow: -1px -1px 2px rgba(0,0,0,0.18), 2px 2px 3px rgba(255,255,255,0.95);">
+                GRÔNCHÔ
+            </p>
+            <div class="h-[2px] mb-8 bg-accent" style="width: 66px;"></div>
+
             <div class="rounded-2xl bg-paper shadow-neu-card p-6">
                 <form method="post" action="{{ route('universe.update') }}" class="flex flex-col gap-7">
                     @csrf
@@ -50,9 +55,9 @@
                         <x-input-error :messages="$errors->get('custom_style')" />
                     </div>
 
-                    <div class="flex items-center gap-3 mt-2">
-                        <x-primary-button>{{ __('Save changes') }}</x-primary-button>
-                        <x-secondary-button type="button" onclick="window.location='{{ route('dashboard') }}'">
+                    <div class="flex items-center justify-center gap-3 mt-2">
+                        <x-primary-button class="!py-2.5 !px-8">{{ __('Save changes') }}</x-primary-button>
+                        <x-secondary-button type="button" class="!py-2.5 !px-8" onclick="window.location='{{ route('dashboard') }}'">
                             {{ __('Cancel') }}
                         </x-secondary-button>
                     </div>
