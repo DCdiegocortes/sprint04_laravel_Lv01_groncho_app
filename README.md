@@ -61,3 +61,6 @@ The two full CRUDs in this project are **Items** (garments) and **Exchanges** (t
 ![Discover](docs/screenshots/discover.png)
 ![Requests](docs/screenshots/requests.png)
 ![Universe](docs/screenshots/universe.png)
+
+## 008 — UI Design
+![UI mockups](docs/screenshots/uix_groncho.png)
