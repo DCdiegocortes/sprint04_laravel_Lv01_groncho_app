@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  <img src="docs/icons/laravel.svg" alt="Laravel" height="22">
-  <img src="docs/icons/php.svg" alt="PHP" height="22">
-  <img src="docs/icons/livewire.svg" alt="Livewire" height="22">
-  <img src="docs/icons/tailwind.svg" alt="Tailwind CSS" height="22">
-  <img src="docs/icons/mysql.svg" alt="MySQL" height="22">
+  <img src="docs/icons/laravel.svg" alt="Laravel" height="34">
+  <img src="docs/icons/php.svg" alt="PHP" height="34">
+  <img src="docs/icons/livewire.svg" alt="Livewire" height="34">
+  <img src="docs/icons/tailwind.svg" alt="Tailwind CSS" height="34">
+  <img src="docs/icons/mysql.svg" alt="MySQL" height="34">
 </p>
 
 A clothing and accessories swap & gift app, with no money involved. Each user builds their own **universe** — an aesthetic profile with a moodboard and a style — and discovers other profiles by swiping through them. When the like is mutual, a **match** is created, unlocking access to each other's wardrobe so they can request trades or gifts.
