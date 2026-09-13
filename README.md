@@ -4,9 +4,13 @@
 
 <p align="center">
   <img src="docs/icons/laravel.svg" alt="Laravel" height="34">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="docs/icons/php.svg" alt="PHP" height="34">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="docs/icons/livewire.svg" alt="Livewire" height="34">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="docs/icons/tailwind.svg" alt="Tailwind CSS" height="34">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="docs/icons/mysql.svg" alt="MySQL" height="34">
 </p>
 
